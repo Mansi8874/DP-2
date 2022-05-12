@@ -1,0 +1,21 @@
+public class Solution {
+
+	public static int knapsack(int[] weights, int[] values, int n, int maxWeight) {
+		//Your code goes here
+        return knapsackM(weights,values,maxWeight,0);
+        
+	}
+    public static int knapsackM(int [] weights,int[] values,int maxWeight,int i){
+        if(weights.length==i || maxWeight==0){
+            return 0;
+        }
+        if(weights[i]>maxWeight){
+            return knapsackM(weights,values,maxWeight,i+1);
+        }else{
+            int op1=values[i]+knapsackM(weights,values,maxWeight-weights[i],i+1);
+            int op2=knapsackM(weights,values,maxWeight,i+1);
+            return Math.max(op1,op2);
+        }
+    }
+
+}
