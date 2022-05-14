@@ -1,0 +1,147 @@
+public class Solution {
+     static int INF = 1000000000; 
+    int[][] dp; 
+    int[][] next; 
+
+	public int solve(String S,String V){
+        
+        /* Your class should be named Solution
+		 * Don't write main().
+		 * Don't read input, it is passed as function argument.
+		 * Return output and don't print it.
+	 	 * Taking input and printing output is handled automatically.
+        */
+		
+   // public int solve(String S,String V){
+    int n = S.length(), m = V.length() ,i, j, prev;
+        dp = new int[n+1][m+1]; 
+        next = new int[n+1][m+1]; 
+        for(i=0;i<n;i++){ 
+            prev = -1; 
+            for(j = 0; j < m; j++){
+                if(S.charAt(i) == V.charAt(j)) 
+                    prev = j; next[i+1][j+1] = prev;
+            } 
+        } 
+        for(i = 1; i <= n; i++) 
+            dp[i][0] = 1;
+        for(i = 0; i <= m; i++){
+            dp[0][i] = INF; 
+        }
+        for(i = 1; i <= n; i++){
+            for(j = 1; j <= m; j++){
+                if(next[i][j] == -1) 
+                    dp[i][j] = 1; 
+                else{ 
+                    dp[i][j] = Math.min(dp[i-1][j],1 + dp[i-1][next[i][j]]); 
+                } 
+            } 
+        } 
+        return dp[n][m];
+	}
+	
+}
+
+
+// public class Solution {
+
+// 	public int solve(String S,String V){
+        
+//         /* Your class should be named Solution
+// 		 * Don't write main().
+// 		 * Don't read input, it is passed as function argument.
+// 		 * Return output and don't print it.
+// 	 	 * Taking input and printing output is handled automatically.
+//         */
+
+//         int storage[][] = new int[S.length()+1][V.length()+1];
+// 		int m=S.length();
+// 		int n=V.length();
+//         for(int i=0;i<=m;i++){   
+//             for(int j=0;j<=n;j++){  
+//                 storage[i][j]=-1;
+//             }
+//         }
+//         return solve(S,V,m,n,storage);
+//     }
+                
+//     public static int solve(String S,String V,int m,int n,int [][] storage){
+
+// 		// int m=S.length();
+// 		// int n=V.length;
+//         if(m==0){
+//             storage[m][n]=n;
+//             return storage[m][n];
+//         }
+//         if(n<=0){
+//             storage[m][n]=1;
+//             return storage[m][n];
+//         }
+//         if(storage[m][n]==-1){
+//             return storage[m][n];
+//         }
+//         int op1=solve(S.substring(1),V,m-1,n,storage);
+//         int i;
+//         for(i=0;i<V.length();i++){
+//             if(S.charAt(0)==V.charAt(i)){
+//                 break;
+//             }
+            
+//         }
+//         if(i==V.length()){
+//                 return 1;
+//             }
+//         int op2=1+solve(S.substring(1),V.substring(i+1),m-1,n-i-1,storage);
+//         storage[m][n]=Math.min(op1,op2);
+//         return storage[m][n];
+//     }         
+        
+        
+        
+        
+        
+        
+        
+// //         return solve(S,V,S.length(),V.length());
+// //     }
+// //     public static int solve(String S,String V,int m,int n){
+        
+// //         if(m==0){
+// //             return n;
+// //         }
+// //         if(n<=0){
+// //             return 1;
+// //         }
+// //         int op1=solve(S.substring(1),V,m-1,n);
+// //         int i;
+// //         for(i=0;i<V.length();i++){
+// //             if(S.charAt(0)==V.charAt(i)){
+// //                 break;
+// //             }
+            
+// //         }
+// //         if(i==V.length()){
+// //                 return 1;
+// //             }
+// //         int op2=1+solve(S.substring(1),V.substring(i+1),m-1,n-i-1);
+// //         return Math.min(op1,op2);
+// //     }
+        
+        
+// // 		int storage[][] = new int[S.length+1][V.length+1];
+// // 		int m=S.length;
+// // 		int n=V.length;
+// // 		for(int i=0;i<=m;i++){
+// // 		     storage[i][0]=i;
+// // 		}
+// // 		for(int j=0;j<=n;j++){
+// // 		     storage[0][j]=n;
+// // 		}
+// // 		for(int i=1;i<=m;i++){
+// // 		    for(int j=1;j<=n;j++){
+		       
+// // 		    }
+// // 		}
+// //  	}
+	
+// }
